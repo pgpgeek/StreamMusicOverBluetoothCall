@@ -43,10 +43,16 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void initAudioManager() {
-        AudioManager audioManager = (AudioManager) getSystemService(AUDIO_SERVICE);
+    	AudioManager audioManager = (AudioManager) getSystemService(AUDIO_SERVICE);
         if (audioManager != null) {
+            Toast.makeText(this, "Transfert de l'Audio en mode 'Appel' : Activé", Toast.LENGTH_LONG).show();
             audioManager.setMode(AudioManager.MODE_IN_COMMUNICATION);
             audioManager.setSpeakerphoneOn(false);
+        }
+        if (audioManager.isBluetoothScoAvailableOffCall()) {
+            Toast.makeText(this, "Activation ... : Activé", Toast.LENGTH_LONG).show();
+            audioManager.startBluetoothSco();
+            audioManager.setBluetoothScoOn(true);
         }
     }
 
